@@ -1,0 +1,41 @@
+# DO NOT DELETE
+
+src/application.o: ./include/application.hpp /usr/include/GLFW/glfw3.h
+src/application.o: /usr/include/GL/gl.h /usr/include/GL/glext.h
+src/application.o: /usr/include/inttypes.h /usr/include/features.h
+src/application.o: /usr/include/stdc-predef.h /usr/include/stdint.h
+src/application.o: ./include/input.hpp ./include/mathematics.hpp
+src/application.o: ./include/vector.hpp ./include/matrix.hpp
+src/application.o: ./include/quaternion.hpp ./include/player.hpp
+src/application.o: ./include/utils.hpp ./include/entity.hpp
+src/application.o: ./include/material.hpp ./include/shader.hpp
+src/application.o: ./include/geometry.hpp ./include/buffer.hpp
+src/application.o: ./include/physics.hpp ./include/gui.hpp
+src/application.o: nanovg/nanovg_gl3.h /usr/include/stdlib.h
+src/application.o: /usr/include/alloca.h /usr/include/string.h
+src/application.o: /usr/include/xlocale.h nanovg/nanovg.h
+src/main.o: ./include/application.hpp /usr/include/GLFW/glfw3.h
+src/main.o: /usr/include/GL/gl.h /usr/include/GL/glext.h
+src/main.o: /usr/include/inttypes.h /usr/include/features.h
+src/main.o: /usr/include/stdc-predef.h /usr/include/stdint.h
+src/main.o: ./include/input.hpp ./include/mathematics.hpp
+src/main.o: ./include/vector.hpp ./include/matrix.hpp
+src/main.o: ./include/quaternion.hpp ./include/player.hpp ./include/utils.hpp
+src/main.o: ./include/entity.hpp ./include/material.hpp ./include/shader.hpp
+src/main.o: ./include/geometry.hpp ./include/buffer.hpp ./include/physics.hpp
+src/main.o: ./include/gui.hpp nanovg/nanovg_gl3.h /usr/include/stdlib.h
+src/main.o: /usr/include/alloca.h /usr/include/string.h
+src/main.o: /usr/include/xlocale.h nanovg/nanovg.h
+src/physics.o: ./include/physics.hpp ./include/mathematics.hpp
+src/physics.o: ./include/vector.hpp ./include/matrix.hpp
+src/physics.o: ./include/quaternion.hpp
+src/player.o: ./include/player.hpp ./include/utils.hpp
+src/player.o: /usr/include/GLFW/glfw3.h /usr/include/GL/gl.h
+src/player.o: /usr/include/GL/glext.h /usr/include/inttypes.h
+src/player.o: /usr/include/features.h /usr/include/stdc-predef.h
+src/player.o: /usr/include/stdint.h ./include/entity.hpp
+src/player.o: ./include/material.hpp ./include/shader.hpp
+src/player.o: ./include/mathematics.hpp ./include/vector.hpp
+src/player.o: ./include/matrix.hpp ./include/quaternion.hpp
+src/player.o: ./include/geometry.hpp ./include/buffer.hpp
+src/player.o: ./include/physics.hpp ./include/input.hpp
