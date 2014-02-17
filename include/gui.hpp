@@ -142,7 +142,7 @@ class Gui : public Entity<Gui>
 public:
 	Gui(size_t _width, size_t _height) : width(_width), height(_height)
 	{
-		vg = nvgCreateGL3(width, height);
+		vg = nvgCreateGL3(width, height, 1);
 		assert(vg);
 		data.init(vg);
 		fps.setContext(vg);
@@ -162,7 +162,7 @@ public:
 		// glEnable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 
-		nvgBeginFrame(vg, width, height);
+		nvgBeginFrame(vg, width, height, 1);
 		fps.draw();
 		Label::drawEach();
 
