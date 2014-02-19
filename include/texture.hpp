@@ -1,11 +1,3 @@
-//
-//  texture.hpp
-//  banana
-//
-//  Created by Marco Fattorel on 26/01/14.
-//  Copyright (c) 2014 Marco Fattorel. All rights reserved.
-//
-
 #ifndef banana_texture_hpp
 #define banana_texture_hpp
 

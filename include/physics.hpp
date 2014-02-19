@@ -1,11 +1,3 @@
-//
-//  state.hpp
-//  banana
-//
-//  Created by Marco Fattorel on 29/01/14.
-//  Copyright (c) 2014 Marco Fattorel. All rights reserved.
-//
-
 #ifndef banana_state_hpp
 #define banana_state_hpp
 

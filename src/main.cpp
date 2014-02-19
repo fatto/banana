@@ -52,7 +52,7 @@ int main(int argc, char*argv[])
 		exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(0);
+	// glfwSwapInterval(0);
 	
 	// std::cout << glGetString(GL_RENDERER) << std::endl;
 	// std::cout << glGetString(GL_VERSION) << std::endl;

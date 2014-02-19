@@ -1,11 +1,3 @@
-//
-//  quaternion.hpp
-//  banana
-//
-//  Created by Marco Fattorel on 28/01/14.
-//  Copyright (c) 2014 Marco Fattorel. All rights reserved.
-//
-
 #ifndef banana_quaternion_hpp
 #define banana_quaternion_hpp
 

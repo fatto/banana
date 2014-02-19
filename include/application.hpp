@@ -1,11 +1,3 @@
-//
-//  application.hpp
-//  banana
-//
-//  Created by Marco Fattorel on 26/01/14.
-//  Copyright (c) 2014 Marco Fattorel. All rights reserved.
-//
-
 #ifndef banana_application_hpp
 #define banana_application_hpp
 
@@ -35,7 +27,6 @@ class Application
 //	bool lines_draw = false;
 //	bool texture_shading = false;
 	Player player1;
-	Label label;
 	Gui gui;
 public:
 	Application(GLFWwindow* _win);

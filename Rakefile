@@ -8,8 +8,8 @@ Rake::Builder.new do |builder|
 	builder.source_search_paths = ['nanovg/src']
 	builder.objects_path = 'nanovg'
 	builder.include_paths = ['nanovg/src']
-	builder.compilation_options = ['-g'
-]end
+	builder.compilation_options = ['-g']
+end
 
 Rake::Builder.new do |builder|
 	builder.target = 'banana'

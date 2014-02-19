@@ -1,11 +1,3 @@
-//
-//  mathematics.hpp
-//  banana
-//
-//  Created by Marco Fattorel on 27/01/14.
-//  Copyright (c) 2014 Marco Fattorel. All rights reserved.
-//
-
 #ifndef banana_mathematics_hpp
 #define banana_mathematics_hpp
 

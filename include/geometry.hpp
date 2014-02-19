@@ -1,11 +1,3 @@
-//
-//  geometry.hpp
-//  banana
-//
-//  Created by Marco Fattorel on 26/01/14.
-//  Copyright (c) 2014 Marco Fattorel. All rights reserved.
-//
-
 #ifndef banana_geometry_hpp
 #define banana_geometry_hpp
 
@@ -112,91 +104,19 @@ class Geometry
 	Buffer vert, ind;
 	GLuint vao;
 	GLsizei size;
-	bool vert_init = false, ind_init = false, vao_init = false;
 public:
-	Geometry() : vert(GL_ARRAY_BUFFER, GL_STATIC_DRAW), ind(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW), vao(0), size(0)
-	{
-		glGenVertexArrays(1, &vao);
-	}
-	~Geometry()
-	{
-		glDeleteVertexArrays(1, &vao);
-	}
+	Geometry();
+	~Geometry();
 	
-	void bind()
-	{
-#ifdef DEBUG
-		if(!vert_init || !ind_init || !vao_init || !size)
-		{
-			std::cout << "incomplete geometry status" << std::endl;
-			return;
-		}
-#endif
-		glBindVertexArray(vao);
-	}
-	void unbind()
-	{
-		glBindVertexArray(0);
-	}
-	void draw()
-	{
-		bind();
-		glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
-		unbind();
-	}
-	void drawLines()
-	{
-		bind();
-		glDrawElements(GL_LINES, size, GL_UNSIGNED_INT, 0);
-		unbind();
-	}
+	void bind();
+	void unbind();
+	void draw();
+	void drawLines();
 
-	void vertices(void* _data, size_t _byte_size)
-	{
-		vert.data(_data, _byte_size);
-		vert_init = true;
-	}
-	void indices(void* _data, GLsizei _byte_size)
-	{
-		size = _byte_size/sizeof(GLuint); // expect gluint array
-		ind.data(_data, _byte_size);
-
-		glBindVertexArray(vao);
-		ind.bind(); // element array is part of vao state
-		glBindVertexArray(0);
-		ind.unbind();
-
-		ind_init = true;
-	}
+	void vertices(void* _data, size_t _byte_size);
+	void indices(void* _data, GLsizei _byte_size);
 	// _index index of vertex attribute, _size number of components(1..4), _stride total vertex size, _offset byte offset into buffer
-	void addVertexAttrib(GLuint _index, GLint _size, GLuint _stride, const GLvoid* _offset)
-	{
-		vert.bind();
-		glBindVertexArray(vao);
-		glEnableVertexAttribArray(_index);
-		glVertexAttribPointer(_index, _size, GL_FLOAT, GL_FALSE, _stride, _offset); // array buffer isn't part of vao state
-		glBindVertexArray(0);
-		vert.unbind();
-
-		vao_init = true;
-	}
+	void addVertexAttrib(GLuint _index, GLint _size, GLuint _stride, const GLvoid* _offset);
 };
-
-// class GeometryFile
-// {
-// public:
-// 	static Geometry loadFrom(const std::string& name)
-// 	{
-// 		std::vector<Collada::ColGeom> v;
-		
-// 		Collada::readGeometries(v, ("asset/" + name + ".dae").c_str());
-		
-// 		std::cout << "size " << (std::static_pointer_cast<std::vector<float>>(v[0].map["POSITION"_sid].data)->size()) << std::endl;
-// 		std::cout << "size " << (std::static_pointer_cast<std::vector<float>>(v[0].map["NORMAL"_sid].data)->size()) << std::endl;
-// 		Geometry g;
-		
-// 		return g;
-// 	}
-// };
 
 #endif
