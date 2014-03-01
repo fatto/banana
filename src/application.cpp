@@ -86,9 +86,12 @@ void Application::update(float t, float dt)
 		player1.editForce();
 	player1.update(t, dt);
 	
-	if(Input().buttonDown(Input::joystick::back))
+	if(glfwGetKey(win, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(win, GL_TRUE);
-	Input().axesValue(Input::joystick::a);
+
+	// if(Input().buttonDown(Input::joystick::back))
+	// 	glfwSetWindowShouldClose(win, GL_TRUE);
+	// Input().axesValue(Input::joystick::a);
 }
 
 void Application::draw()

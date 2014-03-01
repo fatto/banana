@@ -1,4 +1,5 @@
 #include "buffer.hpp"
+#include <cassert>
 
 Buffer::Buffer(GLenum _type, GLenum _usage) : type(_type), usage(_usage)
 {

@@ -13,14 +13,14 @@
 
 struct vertex
 {
-	Mathematics::Vector3 pos;
-	std::array<GLfloat, 3> norm;
-	std::array<GLfloat, 3> colour;
-	std::array<GLfloat, 2> text;
+	Mathematics::vec<float,3> pos;
+	Mathematics::vec<float,3> norm;
+	Mathematics::vec<float,3> colour;
+	Mathematics::vec<float,2> text;
 };
 struct face
 {
-	std::array<GLuint, 3> triang;
+	Mathematics::vec<GLuint,3> triang;
 };
 
 template<GLuint rings, GLuint sectors>
@@ -66,36 +66,39 @@ struct Cube
 	std::array<face, 12> indices;
 	Cube(float size)
 	{
-		vertices[0].pos = {-size, -size, size};
-		vertices[1].pos = {size, -size, size};
-		vertices[2].pos = {size, size, size};
-		vertices[3].pos = {-size, size, size};
-		vertices[4].pos = {-size, -size, -size};
-		vertices[5].pos = {size, -size, -size};
-		vertices[6].pos = {size, size, -size};
-		vertices[7].pos = {-size, size, -size};
+		std::cout << sizeof(Mathematics::vec<float,3>) << std::endl;
+		using namespace Mathematics;
+
+		vertices[0].pos = {{-size, -size, size}};
+		vertices[1].pos = {{size, -size, size}};
+		vertices[2].pos = {{size, size, size}};
+		vertices[3].pos = {{-size, size, size}};
+		vertices[4].pos = {{-size, -size, -size}};
+		vertices[5].pos = {{size, -size, -size}};
+		vertices[6].pos = {{size, size, -size}};
+		vertices[7].pos = {{-size, size, -size}};
 		
-		vertices[0].colour = {0.f, 0.f, 1.f};
-		vertices[1].colour = {1.f, 0.f, 1.f};
-		vertices[2].colour = {1.f, 1.f, 1.f};
-		vertices[3].colour = {0.f, 1.f, 1.f};
-		vertices[4].colour = {0.f, 0.f, 0.f};
-		vertices[5].colour = {1.f, 0.f, 0.f};
-		vertices[6].colour = {1.f, 1.f, 0.f};
-		vertices[7].colour = {0.f, 1.f, 0.f};
+		vertices[0].colour = {{0.f, 0.f, 1.f}};
+		vertices[1].colour = {{1.f, 0.f, 1.f}};
+		vertices[2].colour = {{1.f, 1.f, 1.f}};
+		vertices[3].colour = {{0.f, 1.f, 1.f}};
+		vertices[4].colour = {{0.f, 0.f, 0.f}};
+		vertices[5].colour = {{1.f, 0.f, 0.f}};
+		vertices[6].colour = {{1.f, 1.f, 0.f}};
+		vertices[7].colour = {{0.f, 1.f, 0.f}};
 		
-		indices[0] = {0, 1, 2};
-		indices[1] = {2, 3, 0};
-		indices[2] = {3, 2, 6};
-		indices[3] = {6, 7, 3};
-		indices[4] = {7, 6, 5};
-		indices[5] = {5, 4, 7};
-		indices[6] = {4, 5, 1};
-		indices[7] = {1, 0, 4};
-		indices[8] = {4, 0, 3};
-		indices[9] = {3, 7, 4};
-		indices[10] = {1, 5, 6};
-		indices[11] = {6, 2, 1};
+		indices[0] = {{{0, 1, 2}}};
+		indices[1] = {{{2, 3, 0}}};
+		indices[2] = {{{3, 2, 6}}};
+		indices[3] = {{{6, 7, 3}}};
+		indices[4] = {{{7, 6, 5}}};
+		indices[5] = {{{5, 4, 7}}};
+		indices[6] = {{{4, 5, 1}}};
+		indices[7] = {{{1, 0, 4}}};
+		indices[8] = {{{4, 0, 3}}};
+		indices[9] = {{{3, 7, 4}}};
+		indices[10] = {{{1, 5, 6}}};
+		indices[11] = {{{6, 2, 1}}};
 	}
 };
 

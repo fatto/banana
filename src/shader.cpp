@@ -99,6 +99,10 @@ GLint Shader::attrib(const std::string& _name)
 {
 	return glGetAttribLocation(program, _name.c_str());
 }
+GLint Shader::block(const std::string& _name)
+{
+	return glGetUniformBlockIndex(program, _name.c_str());
+}
 
 GLuint Shader::compile_shader(const std::string& source, GLenum type) const
 {

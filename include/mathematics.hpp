@@ -10,9 +10,14 @@ namespace Mathematics
 	const float tau = 2.f * M_PI;
 	const float epsilon = FLT_EPSILON;
 	const float epsilonSquared = epsilon * epsilon;
-	
+
+	template<class T, std::size_t N>
+	struct vec { T v[N]; };
+
+	typedef float float2 __attribute__((ext_vector_type(2)));
 	typedef float float3 __attribute__((ext_vector_type(3)));
 	typedef float float4 __attribute__((ext_vector_type(4)));
+	// typedef float float33 __attribute__((ext_vector_type(3*3)));
 	typedef float float44 __attribute__((ext_vector_type(4*4)));
 	
 	inline bool equal(float a, float b)

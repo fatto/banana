@@ -13,7 +13,7 @@
 
 class Player : public Entity<Player>
 {
-	Input input;
+	// Input input;
 	Geometry geom;
 	std::reference_wrapper<BaseMaterial> mate;
 	float elapsed = 0.f;
