@@ -9,7 +9,7 @@
 #include "player.hpp"
 #include "mathematics.hpp"
 
-#include <algorithm>
+// #include <algorithm>
 #include <GLFW/glfw3.h>
 
 using namespace Mathematics;
@@ -29,8 +29,8 @@ Player::Player() : mate(BaseMaterial::instance())
 	current.angularMomentum = Vector3(0.f, 0.f, 0.f);
 	current.inertiaTensor = Matrix44().scale(current.mass * current.size * current.size * 1.0f / 6.0f);
 	current.inverseInertiaTensor = current.inertiaTensor.inverse();
-	std::transform(cub.vertices.begin(), cub.vertices.end(), std::back_inserter(current.positions),  [](const vertex& vert){ return vert.pos; });
-	current.forces = std::bind(&Player::applyForce, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+	// std::transform(cub.vertices.begin(), cub.vertices.end(), std::back_inserter(current.positions),  [](const vertex& vert){ return vert.pos; });
+	// current.forces = std::bind(&Player::applyForce, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 	current.recalculate();
 	previous = current;
 //	std::cout << current.to_string() << std::endl;

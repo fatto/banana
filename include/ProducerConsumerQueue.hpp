@@ -27,8 +27,6 @@
 #include <type_traits>
 #include <utility>
 
-namespace folly {
-
 /*
  * ProducerConsumerQueue is a one producer and one consumer queue
  * without locks.
@@ -61,7 +59,7 @@ struct ProducerConsumerQueue
     // We need to destruct anything that may still exist in our queue.
     // (No real synchronization needed at destructor time: only one
     // thread can be doing this.)
-    if (!std::is_trivial_destructor<T>::value) {
+    if (!std::is_trivially_destructible<T>::value) {
       int read = readIndex_;
       int end = writeIndex_;
       while (read != end) {
@@ -172,7 +170,5 @@ private:
   std::atomic<int> readIndex_;
   std::atomic<int> writeIndex_;
 };
-
-}
 
 #endif

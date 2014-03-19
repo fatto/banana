@@ -28,6 +28,12 @@ struct Material
 	{
 		shader.unbind();
 	}
+
+	static T& instance()
+	{
+		static T inst;
+		return inst;
+	}
 protected:
 	void uniform_update() { }
 	Shader shader;
@@ -41,10 +47,10 @@ struct BaseMaterial : public Material<BaseMaterial>
 		shader.setFragment("shader/base.frag");
 		shader.link();
 	}
-	static BaseMaterial& instance()
-	{
-		static BaseMaterial inst;
-		return inst;
-	}
+	// static BaseMaterial& instance()
+	// {
+	// 	static BaseMaterial inst;
+	// 	return inst;
+	// }
 };
 #endif

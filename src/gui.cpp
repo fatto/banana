@@ -2,6 +2,7 @@
 #include "gui.hpp"
 
 #define NANOVG_GL3_IMPLEMENTATION
+// #include "nanovg_gl3buf.h"
 #include "nanovg_gl3.h"
 
 void Label::setContext(NVGcontext* _vg)
@@ -84,7 +85,7 @@ void FPScounter::on_draw()
 
 Gui::Gui(size_t _width, size_t _height) : width(_width), height(_height)
 {
-	vg = nvgCreateGL3(width, height, 1);
+	vg = nvgCreateGL3(width, height, NVG_ANTIALIAS);
 	assert(vg);
 	data.init(vg);
 	fps.setContext(vg);
@@ -104,7 +105,7 @@ void Gui::on_draw()
 	// glEnable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
 
-	nvgBeginFrame(vg, width, height, 1);
+	nvgBeginFrame(vg, width, height, 1.f, NVG_STRAIGHT_ALPHA);
 	fps.draw();
 	Label::drawEach();
 

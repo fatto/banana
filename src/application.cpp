@@ -7,9 +7,25 @@
 //
 
 #include "application.hpp"
+#include "window.hpp"
+#include "input.hpp"
 
-Application::Application(GLFWwindow* _win) : win(_win), gui(900, 600) //image("assets/image.png")
+
+Application::Application() : g(900, 600), plane_obj("assets/plane.obj")// : gui(900, 600) //image("assets/image.png")
 {
+	// auto hand = Input::keyPress_signal.connect(std::bind(&Application::on_keyPress, this, std::placeholders::_1));
+	// Input::keyPress_signal.connect([this](KeyEvent::KeyCode& key){on_keyPress(key);});
+	
+
+	shader.setVertex("shader/flat.vert");
+	shader.setFragment("shader/flat.frag");
+	shader.link();
+
+	plane.vertices(plane_obj.vertices.data(), plane_obj.vertices.size()*sizeof(vertex));
+	plane.indices(plane_obj.indices.data(), plane_obj.indices.size()*sizeof(face));
+	plane.addVertexAttrib(shader.attrib("position"), 3, sizeof(vertex), offsetof_ptr(vertex, pos));
+	plane.addVertexAttrib(shader.attrib("normal"), 3, sizeof(vertex), offsetof_ptr(vertex, norm));
+
 //	image.setFromFile("assets/blur.png");
 //	arr.setFromMemory(33, 33, 33, nullptr);
 //	
@@ -54,13 +70,15 @@ Application::Application(GLFWwindow* _win) : win(_win), gui(900, 600) //image("a
 //	
 //	model_planet = glm::mat4(1.f);
 //	model_ship = glm::translate(glm::mat4(1.f), glm::vec3(2.f, 0.f, 0.f));
-	glEnable(GL_DEPTH_TEST);
-	float gray = 45.f / 255.f;
-	glClearColor(gray, gray, gray, 1.f);
+}
+Application::~Application()
+{
+	
 }
 
 void Application::update(float t, float dt)
 {
+	Input::dispatch();
 //	model_planet = glm::rotate(model_planet, dt, glm::vec3(0.f, 1.f, 0.f));
 //	// model_ship = glm::rotate(mode_ship, dt, glm::vec3(0.f, 1.f, 0.f));
 //	view = glm::translate(glm::mat4(1.0f), glm::vec3(0.f,0.f,-6.f));
@@ -81,13 +99,13 @@ void Application::update(float t, float dt)
 //		texture_shading = true;
 //	else
 //		texture_shading = false;
-	gui.update(t, dt);
-	if(glfwGetKey(win, GLFW_KEY_F) == GLFW_PRESS)
-		player1.editForce();
-	player1.update(t, dt);
+	// gui.update(t, dt);
+	// if(glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+	// 	player1.editForce();
+	// player1.update(t, dt);
 	
-	if(glfwGetKey(win, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(win, GL_TRUE);
+	// if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	// 	glfwSetWindowShouldClose(window, GL_TRUE);
 
 	// if(Input().buttonDown(Input::joystick::back))
 	// 	glfwSetWindowShouldClose(win, GL_TRUE);
@@ -97,9 +115,19 @@ void Application::update(float t, float dt)
 void Application::draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	player1.draw();
+	// player1.draw();
 
-	gui.draw();
+	// gui.draw();
+
+	using namespace Mathematics;
+	shader.bind();
+	shader.load("model", Matrix44().identity());
+	shader.load("view", Matrix44().translate({0.f, -2.f, -2.f}));
+	shader.load("projection", Matrix44().perspective(tau/4.f, 900/600, 0.1f, 100.f));
+
+	plane.draw();
+
+	shader.unbind();
 
 //	Shader& shading = flat_shading ? flat : smooth;
 //	shading.bind();
@@ -117,6 +145,10 @@ void Application::draw()
 //	
 //	image.unbind();
 //	shading.unbind();
+	// Window::drawEach();
+	g.draw();
+	win.draw();
+	glfwPollEvents();
 }
 
 
@@ -128,3 +160,14 @@ void Application::draw()
 //	//if there's an error, display it
 //	if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 //}
+bool Application::shouldExit()
+{
+	bool should_exit = false;
+	// Window::for_each(
+	// 	[&](Window& w)
+	// 	{
+	// 		should_exit = should_exit || w.shouldExit();
+	// 	}
+	// );
+	return should_exit || stop;
+}

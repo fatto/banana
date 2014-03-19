@@ -120,6 +120,7 @@ GLuint Shader::compile_shader(const std::string& source, GLenum type) const
 
 	GLint status = 0;
 	glGetShaderiv(handle, GL_COMPILE_STATUS, &status);
+	return handle;
 	return status? handle : 0;
 }
 void Shader::load_uniform()

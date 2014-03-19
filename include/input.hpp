@@ -4,6 +4,11 @@
 #include <GLFW/glfw3.h>
 #include <cassert>
 #include <iostream>
+#include "ProducerConsumerQueue.hpp"
+#include "event.hpp"
+#include "signal.hpp"
+
+
 class Input
 {
 	int joy;
@@ -108,6 +113,36 @@ public:
 		assert(a < count);
 		return axes[a];
 	}
+
+
+	static Signal<KeyEvent::KeyCode> keyPress_signal;
+	static Signal<KeyEvent::KeyCode> keyRelease_signal;
+
+protected:
+	static void key_callback(GLFWwindow*, int key, int scancode, int action, int mods)
+	{
+		if(action == GLFW_REPEAT)
+			return;
+
+		KeyEvent key_e{KeyEvent::Status(action), KeyEvent::KeyCode(key)};
+		assert(key_queue.write(key_e));
+	}
+	static void dispatch()
+	{
+		KeyEvent event;
+		while(key_queue.read(event))
+		{
+			if(event.action == KeyEvent::RELEASE)
+				keyRelease_signal.emit(event.key);
+			else
+				keyPress_signal.emit(event.key);
+		}
+	}
+
+private:
+	static ProducerConsumerQueue<KeyEvent> key_queue;
+	friend class Window;
+	friend class Application;
 };
 
 

@@ -8,21 +8,12 @@
 #include <string>
 #include <vector>
 
-template <class T>
-class counter
-{
-	static GLuint unique_id;
-public:
-	GLuint id() { return unique_id++; }
-};
-template <class T> GLuint counter<T>::unique_id(0);
-
 class Texture2D : counter<Texture2D>
 {
 	GLuint handle;
 	GLuint unit;
 public:
-	Texture2D() : unit(counter<Texture2D>::id())
+	Texture2D(GLuint _unit) : unit(_unit)
 	{
 		glGenTextures(1, &handle);
 		glActiveTexture(GL_TEXTURE0 + unit);
@@ -75,7 +66,7 @@ class Texture2DArray : counter<Texture2DArray>
 	GLuint handle;
 	GLuint unit;
 public:
-	Texture2DArray() : unit(counter<Texture2DArray>::id())
+	Texture2DArray(GLuint _unit) : unit(_unit)
 	{
 		glGenTextures(1, &handle);
 		glActiveTexture(GL_TEXTURE0 + unit);

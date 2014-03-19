@@ -2,6 +2,7 @@
 #define banana_entity_hpp
 
 #include <list>
+#include <cstddef>
 
 template <class T>
 struct Entity
@@ -42,12 +43,16 @@ public:
 	static void updateEach(float t, float dt)
 	{
 		for(T* e : entity_list)
-			e->update(t, dt);
+			e->on_update(t, dt);
 	}
 	static void drawEach()
 	{
 		for(T* e : entity_list)
-			e->draw();
+			e->on_draw();
+	}
+	static size_t size()
+	{
+		return entity_list.size();
 	}
 };
 
